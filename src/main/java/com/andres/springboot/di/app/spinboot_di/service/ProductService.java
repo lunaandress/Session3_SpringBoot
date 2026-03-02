@@ -20,10 +20,17 @@ import com.andres.springboot.di.app.spinboot_di.repositories.ProductRespository;
 public class ProductService implements IProductService {
 
 //Inyectamos el repositorio y asi ya no depende de un new y todo lo maneja desde el ocntrolador 
-@Autowired
+//@Autowired
 private ProductRespository respository;
 
 //private ProductRespository respository= new ProductRespository();
+
+//Le decimos la Autowired que lo inyectemos  en el reporoducto respositori pero mediante el 
+// el metodo GET
+@Autowired
+public void setRespository(ProductRespository respository) {
+    this.respository = respository;
+}
 
 //METODOS
 
@@ -44,6 +51,7 @@ public List<Product>findAll(){
 public Optional<Product> findById(long id){
     return respository.findById(id);
 }
+
 
 
 

@@ -6,8 +6,6 @@ import java.util.Optional;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.context.annotation.RequestScope;
-import org.springframework.web.context.annotation.SessionScope;
 
 import com.andres.springboot.di.app.spinboot_di.models.Product;
 
@@ -16,7 +14,7 @@ import com.andres.springboot.di.app.spinboot_di.models.Product;
 //@Component @Repository es igual a @Componentes pero especialmente para DAO
 @Primary
 //@RequestScope // por usuario : Una instancia por petición HTTP
-@SessionScope //Una instancia por sesión de usuario al cerrar  la session o navegador
+//@SessionScope //Una instancia por sesión de usuario al cerrar  la session o navegador
 @Repository("productList")//nombre que le damos
 public class ProductRespositoryImpl  implements IProductRepository {
     

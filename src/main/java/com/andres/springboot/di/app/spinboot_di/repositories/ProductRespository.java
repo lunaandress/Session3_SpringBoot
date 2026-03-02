@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.andres.springboot.di.app.spinboot_di.models.Product;
@@ -14,8 +13,7 @@ import com.andres.springboot.di.app.spinboot_di.models.Product;
 //@Component @Repository es igual a @Componentes pero especialmente para DAO
 @Repository
 public class ProductRespository  implements IProductRepository {
-
-
+    
     //Se encarga del acceso a datos
 
     private  List<Product> data;

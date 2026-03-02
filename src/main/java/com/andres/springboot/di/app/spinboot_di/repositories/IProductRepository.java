@@ -7,6 +7,8 @@ import com.andres.springboot.di.app.spinboot_di.models.Product;
 
 public interface IProductRepository {
     List<Product>findAll();
+    
     Optional<Product> findById(long id);
+
 
 }

@@ -25,12 +25,11 @@ private ProductRespository respository;
 
 //private ProductRespository respository= new ProductRespository();
 
-//Le decimos la Autowired que lo inyectemos  en el reporoducto respositori pero mediante el 
-// el metodo GET
-@Autowired
-public void setRespository(ProductRespository respository) {
+// EL AUTOWIRED POR CONSTRUCTOR no es necesario poener la etiqueta del autowired
+public ProductService(ProductRespository respository) {
     this.respository = respository;
 }
+
 
 //METODOS
 
@@ -46,6 +45,8 @@ public List<Product>findAll(){
         return newProduct;
     }).collect(Collectors.toList());
 }
+
+
 
 @Override
 public Optional<Product> findById(long id){

@@ -12,10 +12,12 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 //Spring AOP que indica que una clase contiene aspectos (código que intercepta
 // métodos para añadir comportamiento como logs, seguridad, etc.
+@Order(2)//da la orden de ejecucion del @Aspect
 @Aspect
 @Component
 public class GreetingAspect {

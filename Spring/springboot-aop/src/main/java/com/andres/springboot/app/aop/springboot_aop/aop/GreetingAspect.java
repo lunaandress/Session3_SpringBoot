@@ -10,6 +10,7 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
@@ -21,18 +22,26 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class GreetingAspect {
+
+
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
+
+    //@Pointcut define la “regla” o “grupo de métodos” que quieres interceptar, y luego
+    //puedes reutilizar esa misma regla en cualquier anotación de AOP
+    @Pointcut("execution(String com.andres.springboot.app.aop.springboot_aop.services.GreetingService.*(..))")
+    private void  greetingLoggerPointCut (){}
+
 
     //JoinPoint es un punto de union con un aspecto Aspecto
     //Before le decimos donde lo vamos a interceptar a que metodo
-    @Before("execution(String com.andres.springboot.app.aop.springboot_aop.services.GreetingService.*(..))")
+    @Before("greetingLoggerPointCut")
     public void loggerBefore(JoinPoint joinPoint){
         String method= joinPoint.getSignature().getName();
         String args=Arrays.toString(joinPoint.getArgs());
         logger.info(" Antes " + method + " " + args);
     }
 
-    @After("execution(String com.andres.springboot.app.aop.springboot_aop.services.GreetingService.*(..))")
+    @After("greetingLoggerPointCut")
     public void loggerAfter(JoinPoint joinPoint){
         String method= joinPoint.getSignature().getName();
         String args=Arrays.toString(joinPoint.getArgs());

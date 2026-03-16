@@ -31,12 +31,28 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 
 		//findOne();
 		//create();
-		update();
+		//update();
+		System.out.println("DATOS DE USUARIOS");
+		list();
+		delete();
+		list();
+		
+
+	}
+
+	@Transactional
+	public  void delete(){
+		System.out.println("Ingrese el Id a eliminar:");
+		Long id = sc.nextLong();
+		repository.deleteById(id);
+
+
 
 	}
 
 
-	@Transactional
+
+	@Transactional//  eso se usa cuando se modifica una tabla en la DB
 	public void update(){
 		System.out.println("ingrese el id de la persona:");
 		long id = sc.nextLong();
@@ -45,8 +61,8 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 			System.out.println("Ingrese el lenguaje de Programacion");
 			String programmingLanguage= sc.next();
 			person.setProgrammingLanguage(programmingLanguage);
-			 Person personDb =repository.save(person);
-			 System.out.println(personDb);
+			Person personDb =repository.save(person);
+			System.out.println(personDb);
 		});
 	}
 

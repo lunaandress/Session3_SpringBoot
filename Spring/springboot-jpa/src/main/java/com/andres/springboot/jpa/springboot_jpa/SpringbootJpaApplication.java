@@ -1,6 +1,7 @@
 package com.andres.springboot.jpa.springboot_jpa;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.andres.springboot.jpa.springboot_jpa.entities.Person;
 import com.andres.springboot.jpa.springboot_jpa.respositories.PersonRepository;
 
+import jakarta.transaction.Transactional;
+
 @SpringBootApplication
 public class SpringbootJpaApplication implements CommandLineRunner {
 
@@ -18,15 +21,33 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		SpringApplication.run(SpringbootJpaApplication.class, args);
 	}
 
+	static Scanner sc = new Scanner(System.in);
+
 	@Autowired
 	private  PersonRepository repository;
 
 	@Override
 	public void run(String... args) throws Exception {
 
-		findOne();
-		create();
+		//findOne();
+		//create();
+		update();
 
+	}
+
+
+	@Transactional
+	public void update(){
+		System.out.println("ingrese el id de la persona:");
+		long id = sc.nextLong();
+		Optional <Person> optionalP  = repository.findById(id);
+		optionalP.ifPresent(person ->{
+			System.out.println("Ingrese el lenguaje de Programacion");
+			String programmingLanguage= sc.next();
+			person.setProgrammingLanguage(programmingLanguage);
+			 Person personDb =repository.save(person);
+			 System.out.println(personDb);
+		});
 	}
 
 

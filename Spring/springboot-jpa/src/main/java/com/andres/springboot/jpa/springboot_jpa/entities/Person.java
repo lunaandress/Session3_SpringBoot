@@ -26,7 +26,7 @@ public class Person {
     }
 
     // Constructor sin id (lo genera la base de datos)
-    public Person(String name, String lastname, String programmingLanguage) {
+    public Person (String name, String lastname, String programmingLanguage) {
         this.name = name;
         this.lastname = lastname;
         this.programmingLanguage = programmingLanguage;

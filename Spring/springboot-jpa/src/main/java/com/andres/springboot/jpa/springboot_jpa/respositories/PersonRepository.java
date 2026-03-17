@@ -15,10 +15,13 @@ public interface PersonRepository  extends CrudRepository<Person,Long> {
 
 
     //METODOS
+
+    //Sub Query
+    @Query("select p.name , length(p.name) from Person p where length(p.name)=(select min (length(p.name)))")
+    public List<Object[]>getShorterName();
+
     @Query("select min(p.id), max(p.id), sum(p.id), avg(length(p.name)), count(p.id) from Person p")
     Object[] getResumenAgregacion();
-
-
     @Query("select p from Person p order by p.name asc")
     List<Person>getAll();
     @Query("select  p from Person p where p.id between 1 and 8 order by p.name desc ")

@@ -29,10 +29,13 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		//MENU
+
+
 
 		//list();
-
 		//findOne();
+
 		//create();
 		//update();
 		//delete();
@@ -41,7 +44,21 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		//personalizeQueryDistinct();
 		//personalQueriesConcatUppLow();
 		//personalizeBetween();
-		obtenerResumenAgregado();
+		//obtenerResumenAgregado();
+		subQueries();
+	}
+
+
+	@Transactional
+	private void subQueries(){
+	System.out.println("====Consulta por le nombre mas corto y su largo =====");
+	List<Object[]> registers =repository.getShorterName();
+	registers.forEach(reg -> {
+		String name= (String) reg[0];
+		Integer length = (Integer) reg[1];
+		System.out.println("name = " + name + " length = " + length);
+	});
+
 	}
 
 
@@ -53,7 +70,7 @@ public void obtenerResumenAgregado() {
 
     Object[] resumenReg;
 
-    // Detectar si viene anidado
+    //  Detectar si viene anidado
     if (result instanceof Object[] && ((Object[]) result).length == 1 && ((Object[]) result)[0] instanceof Object[]) {
         resumenReg = (Object[]) ((Object[]) result)[0];
     } else {

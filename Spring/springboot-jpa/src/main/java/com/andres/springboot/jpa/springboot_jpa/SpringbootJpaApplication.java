@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.andres.springboot.jpa.springboot_jpa.dto.PersonDto;
 import com.andres.springboot.jpa.springboot_jpa.entities.Person;
 import com.andres.springboot.jpa.springboot_jpa.respositories.PersonRepository;
 
@@ -48,6 +49,10 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		perObjects.forEach(reg ->{
 			System.out.println("programmingLanguage=" + reg[1] + "person= " + reg[0]);
 		});
+
+		System.out.println("consulta que puebla y devuelve una clase dto ");
+		List<PersonDto> personDto= repository.findAllPersonDto();
+		personDto.forEach(System.out::println);
 	}
 
 

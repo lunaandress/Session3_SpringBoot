@@ -17,9 +17,12 @@ public interface PersonRepository  extends CrudRepository<Person,Long> {
     //METODOS
 
 
+    // tambien se puede concatenrt asi || ' '  ||
+    @Query("select  upper (CONCAT(p.name , ' ' , p.lastname)) from Person p")
+    List<String> findAllFullNameConcat();
+
     @Query("select distinct p.name from Person p")
     List<String> findAllNames();
-
     // este metodo me  crea  un nuevo objeto  y me muestra al informacion  pero con los variables de DTO
     @Query("select new  com.andres.springboot.jpa.springboot_jpa.dto.PersonDto (p.name , p.lastname ) from  Person p ")
     List<PersonDto>findAllPersonDto();

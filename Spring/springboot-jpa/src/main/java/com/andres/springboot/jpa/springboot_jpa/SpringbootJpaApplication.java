@@ -38,7 +38,8 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		//delete();
 		//personalizedQueries();
 		//personalizeQueries2();
-		personalizeQueryDistinct();
+		//personalizeQueryDistinct();
+		personalQueriesConcatUppLow();
 
 	
 		
@@ -48,6 +49,12 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 
 	}
 
+@Transactional
+	public void personalQueriesConcatUppLow(){
+		System.out.println("=======consult nombre y apellidos concatenados ======= ");
+		List<String> names =repository.findAllFullNameConcat();
+		names.forEach(System.out::println);
+	}
 
 	@Transactional
 	public void personalizeQueryDistinct(){
@@ -55,11 +62,6 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 			List<String> names= repository.findAllNames();
 			names.forEach(System.out::println);
 		}
-
-
-
-
-
 	@Transactional
 	public void personalizeQueries2(){
 		System.out.println("=======consulta por pobjeto person  y lenguje de programacion =========");
@@ -72,8 +74,6 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		List<PersonDto> personDto= repository.findAllPersonDto();
 		personDto.forEach(System.out::println);
 	}
-
-
 	@Transactional
 	public void personalizedQueries(){
 		System.out.println("=========Consulta Personalizada============");
@@ -82,14 +82,12 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		String name = repository.getNameById(id);
 		System.out.println(name);
 	}
-
 	@Transactional
 	public  void delete(){
 		System.out.println("Ingrese el Id a eliminar:");
 		Long id = sc.nextLong();
 		repository.deleteById(id);
 	}
-
 	@Transactional//  eso se usa cuando se modifica una tabla en la DB
 	public void update(){
 		System.out.println("ingrese el id de la persona:");
@@ -103,7 +101,7 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 			System.out.println(personDb);
 		});
 	}
-
+	@Transactional
 	public void create(){
 		Scanner sc = new Scanner(System.in);
 		System.out.println("INGRESE LOS DATA DEL NUEVO USUARIO ");
@@ -119,7 +117,9 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		repository.findById(personNew.getId()).ifPresent(p->System.out.println(person));
 	}
 
-	public void  findOne(){
+	/////////////////////////////////////////////////////
+
+		public void  findOne(){
 		//Person  person = null;
 		//Optional <Person> optionalPerson=repository.findById(10l);
 		//if (optionalPerson.isPresent()) {
@@ -138,8 +138,6 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 
 	}
 
-
-	// meto los metodos en otro metodo  void
 public  void list(){
 	//METODOS TRAIDOS DE LA INTERFACE
 		//List<Person>persons=(List<Person>) repository.findAll();

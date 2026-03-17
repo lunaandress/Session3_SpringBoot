@@ -15,13 +15,14 @@ public interface PersonRepository  extends CrudRepository<Person,Long> {
 
 
     //METODOS
+    @Query("select min(p.id), max(p.id), sum(p.id), avg(length(p.name)), count(p.id) from Person p")
+    Object[] getResumenAgregacion();
 
-    @Query("select  p from Person p where p.id between 2 and 5 ")
+
+    @Query("select p from Person p order by p.name asc")
+    List<Person>getAll();
+    @Query("select  p from Person p where p.id between 1 and 8 order by p.name desc ")
     List<Person>findAllBetweenId();
-
-
-
-
     // tambien se puede concatenrt asi || ' '  ||
     @Query("select  upper (CONCAT(p.name , ' ' , p.lastname)) from Person p")
     List<String> findAllFullNameConcat();
@@ -31,7 +32,7 @@ public interface PersonRepository  extends CrudRepository<Person,Long> {
     @Query("select new  com.andres.springboot.jpa.springboot_jpa.dto.PersonDto (p.name , p.lastname ) from  Person p ")
     List<PersonDto>findAllPersonDto();
     @Query("select  p  ,  p.programmingLanguage from Person p")
-    List<Object[]>findAllMixPerson(); 
+    List<Object[]>findAllMixPerson();
     @Query("select p.name from Person p where p.id=?1")
     String getNameById(long id);
     @Query("select p from Person p where p.id=?1")

@@ -40,35 +40,46 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		//personalizeQueries2();
 		//personalizeQueryDistinct();
 		//personalQueriesConcatUppLow();
-		personalizeBetween();
-		
-
-	
-		
-
-
-
-
+		//personalizeBetween();
+		obtenerResumenAgregado();
 	}
 
+
+@Transactional
+public void obtenerResumenAgregado() {
+    System.out.println("===========Resumen de funciones de agregado =========");
+
+    Object result = repository.getResumenAgregacion();
+
+    Object[] resumenReg;
+
+    // Detectar si viene anidado
+    if (result instanceof Object[] && ((Object[]) result).length == 1 && ((Object[]) result)[0] instanceof Object[]) {
+        resumenReg = (Object[]) ((Object[]) result)[0];
+    } else {
+        resumenReg = (Object[]) result;
+    }
+
+    System.out.println(
+        "min= " + resumenReg[0] +
+        ", max= " + resumenReg[1] +
+        ", sum= " + resumenReg[2] +
+        ", avg= " + resumenReg[3] +
+        ", count= " + resumenReg[4]
+    );
+}
 	@Transactional
 	public void personalizeBetween(){
 		System.out.println("==========consulta por rangos========");
 		List<Person>personsBet=repository.findAllBetweenId();
 		personsBet.forEach(System.out::println);
-
-	
-
 	}
-
-
-@Transactional
+	@Transactional
 	public void personalQueriesConcatUppLow(){
 		System.out.println("=======consult nombre y apellidos concatenados ======= ");
 		List<String> names =repository.findAllFullNameConcat();
 		names.forEach(System.out::println);
 	}
-
 	@Transactional
 	public void personalizeQueryDistinct(){
 			System.out.println("Imprimir consultas con nombres de personas ");

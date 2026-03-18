@@ -2,8 +2,8 @@ package com.andres.springboot.jpa.springboot_jpa_relationship.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.andres.springboot.jpa.springboot_jpa_relationship.entities.Invocie;
+import com.andres.springboot.jpa.springboot_jpa_relationship.entities.Invoice;
 
-public interface InvoiceRepository  extends CrudRepository<Invocie,Long>{
+public interface InvoiceRepository  extends CrudRepository<Invoice,Long>{
 
 }

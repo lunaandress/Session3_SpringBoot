@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="invoice")
-public class Invocie {
+public class Invoice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,16 +24,26 @@ public class Invocie {
 
 
 
-    public Invocie(String description, long total) {
+    public Invoice(String description, long total) {
         this.description = description;
         this.total = total;
     }
-    public Invocie() {
+    public Invoice() {
 
         
     }
 
 
+    
+
+
+
+    public Client getClient() {
+        return client;
+    }
+    public void setClient(Client client) {
+        this.client = client;
+    }
 
     public long getId() {
         return id;
@@ -57,6 +67,7 @@ public class Invocie {
     public String toString() {
         return "{id=" + id + ", description=" + description + ", total=" + total + ", client=" + client + "}";
     }
+    
 
 
     

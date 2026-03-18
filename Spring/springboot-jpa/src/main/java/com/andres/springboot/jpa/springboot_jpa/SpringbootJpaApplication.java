@@ -36,7 +36,6 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		//list();
 		//findOne();
 
-		//create();
 		//update();
 		//delete();
 		//personalizedQueries();
@@ -45,7 +44,8 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		//personalQueriesConcatUppLow();
 		//personalizeBetween();
 		//obtenerResumenAgregado();
-		subQueries();
+		//subQueries();
+		create();
 	}
 
 
@@ -60,8 +60,6 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 	});
 
 	}
-
-
 @Transactional
 public void obtenerResumenAgregado() {
     System.out.println("===========Resumen de funciones de agregado =========");

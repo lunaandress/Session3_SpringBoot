@@ -1,6 +1,7 @@
 package com.andres.springboot.jpa.springboot_jpa.entities;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,6 +11,9 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "persons")
 public class Person {
+
+    @Embedded
+    private Audit audit = new Audit();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +35,7 @@ public class Person {
         this.lastname = lastname;
         this.programmingLanguage = programmingLanguage;
     }
+
 
     // GETTERS Y SETTERS
 
@@ -71,6 +76,8 @@ public class Person {
         return "Person [id=" + id +
                 ", name=" + name +
                 ", lastname=" + lastname +
-                ", programmingLanguage=" + programmingLanguage + "]";
+                ", programmingLanguage=" + programmingLanguage + "]"
+                + " create_at= " + audit.getCreatAt() + " "+
+                "update= " + audit.getUpdateAt();
     }
 }

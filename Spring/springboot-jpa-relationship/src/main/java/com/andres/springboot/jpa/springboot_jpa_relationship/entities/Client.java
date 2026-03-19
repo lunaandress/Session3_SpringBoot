@@ -25,7 +25,6 @@ public class Client {
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)// se insewrta o borra en cascada osea en conjunto 
     private List<Address> addressList; //lista de direcciones
 
-
     public Client(String name, String lastname) {
         this();
         this.name = name;

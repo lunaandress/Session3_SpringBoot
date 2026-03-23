@@ -5,6 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="products")
@@ -14,8 +17,14 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;
 
+    @NotEmpty // con esto le digo que mi variable no sea vacia  ojo  empy solo con string
+    @Size(min = 3,  max = 20)//aqui pongo el minimo y el maximo
     private String name;
+
+    @Min(500)
     private int price ;
+
+    @NotEmpty
     private String description;
 
     

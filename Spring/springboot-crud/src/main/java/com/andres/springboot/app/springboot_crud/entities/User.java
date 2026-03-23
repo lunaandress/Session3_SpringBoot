@@ -11,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 
 @Entity
@@ -34,7 +35,8 @@ uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id","roles_id"})}
 )
 private List<Role> roles;
 
-
+@Transient // con esto le decimos que no es de la tabla para  que no salte error
+private boolean admin;//campo no de la tabla
 
 
 
@@ -61,6 +63,12 @@ public List<Role> getRoles() {
 }
 public void setRoles(List<Role> roles) {
     this.roles = roles;
+}
+public boolean isAdmin() {
+    return admin;
+}
+public void setAdmin(boolean admin) {
+    this.admin = admin;
 }
 
 

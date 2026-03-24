@@ -41,8 +41,12 @@ uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id","roles_id"})}
 )
 private List<Role> roles;
 
+private boolean enabled; // ayuda a desactivar disponibe en la base de datos 
+
 @Transient // con esto le decimos que no es de la tabla para  que no salte error
 private boolean admin;//campo no de la tabla
+
+
 
 
 
@@ -75,6 +79,12 @@ public boolean isAdmin() {
 }
 public void setAdmin(boolean admin) {
     this.admin = admin;
+}
+public boolean isEnabled() {
+    return enabled;
+}
+public void setEnabled(boolean enabled) {
+    this.enabled = enabled;
 }
 
 

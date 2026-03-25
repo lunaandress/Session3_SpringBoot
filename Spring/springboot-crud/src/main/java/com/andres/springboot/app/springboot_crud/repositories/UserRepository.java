@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import com.andres.springboot.app.springboot_crud.entities.User;
 
 public interface UserRepository extends CrudRepository<User,Long> {
-    Optional<User> findByUserName(String username);
+    Optional<User> findByUsername(String username);
+    
 
 }

@@ -1,5 +1,7 @@
 package com.andres.curso.springboot.app.springbootcrud.security.filter;
 
+import static com.andres.curso.springboot.app.springbootcrud.security.TokenJwtConfig.*;
+
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
@@ -18,14 +20,11 @@ import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-import static com.andres.curso.springboot.app.springbootcrud.security.TokenJwtConfig.*;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -69,17 +68,18 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String username = user.getUsername();
         Collection<? extends GrantedAuthority> roles = authResult.getAuthorities();
 
-        Claims claims = Jwts.claims()
-                .add("authorities", new ObjectMapper().writeValueAsString(roles))
-                .add("username", username)
-        .build();
-
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("username", username);
+        claims.put("authorities", roles.stream()
+                .map(role -> Map.of("authority", role.getAuthority()))
+                .toList()
+        );
 
         String token = Jwts.builder()
-                .subject(username)
-                .claims(claims)
-                .expiration(new Date(System.currentTimeMillis() + 3600000))
-                .issuedAt(new Date())
+                .setClaims(claims)
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 3600000))
                 .signWith(SECRET_KEY)
                 .compact();
 

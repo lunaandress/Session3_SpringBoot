@@ -15,10 +15,6 @@ const initProducts=[
     
 
 ];
-
-
-
-
 export const listProdcut = () =>{
     return initProducts
 }

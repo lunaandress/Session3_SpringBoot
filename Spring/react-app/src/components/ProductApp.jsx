@@ -1,8 +1,12 @@
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { listProdcut } from "../services/ProductService";
+import { ProductGrid } from "./ProductGrid";
 
 
-export const ProductApp = () =>{
+
+
+export const ProductApp = ({title}) =>{
 
     const[products , setProduct]=useState([])
     useEffect(()=>{
@@ -11,25 +15,11 @@ export const ProductApp = () =>{
     },[])
     return (
         <>
-        <h1> Lista de Productos</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>name</th>
-                    <th>description</th>
-                    <th>price</th>
-                </tr>
-            </thead>
-            <tbody>
-                {products.map(product =>{
-                return (<tr key={product.name}>
-                    <td>{product.name}</td>
-                    <td>{product.description}</td>
-                    <td>{product.price}</td>
-                </tr>)
-                })}
-            </tbody>
-        </table>
+        <h1>{title.text}</h1>
+        <ProductGrid products={products}/>
         </>
     )
 }
+ProductApp.propTypes={
+        title:PropTypes.string.isRequired
+    }

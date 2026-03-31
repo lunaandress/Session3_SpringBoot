@@ -13,12 +13,18 @@ export const ProductApp = ({title}) =>{
     useEffect(()=>{
         const result = listProdcut()
         setProduct(result)
-    },[])
+    },[]);
+
+
+    const handlerAddProduct= (product =>{
+        console.log(product)
+        setProduct([...products,{...product}])
+    })
     return (
         <div>
             <div>
             <h1>{title.text}</h1>
-            <ProductForm/>
+            <ProductForm handlerAdd={handlerAddProduct}/>
             </div>
             <div>
             <ProductGrid products={products}/>

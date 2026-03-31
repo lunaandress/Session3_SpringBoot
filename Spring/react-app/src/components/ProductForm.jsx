@@ -1,16 +1,25 @@
-import { useState } from "react"
+import { useState } from "react";
 
 const initialDateForm={
     name:'',
     description: ' ',
     price: 0
 }
-export const  ProductForm =()=>{
+export const  ProductForm =({handlerAdd})=>{
     const[form,setForm] = useState(initialDateForm);
 
-   // const{name,description,price}=form
+    const{name,description,price}=form
     return(
-        <form action="">
+        <form onSubmit={(event)=>{
+            event.preventDefault();
+            if (!name || !description || !price ) {
+                alert('Debe de completar los datos del formulario')
+                return;
+            }
+            console.log(form)
+            handlerAdd(form)
+            setForm(initialDateForm);
+        }}>
             <div>
             <input placeholder="Name"
             style={{marginBottom:'2px'}}
